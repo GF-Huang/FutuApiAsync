@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net45;netcoreapp2.1</TargetFrameworks>
+    <Version>0.1.0</Version>
+    <Description>在富途官方 API 的基础上进行异步包装，使接口更符合现代 C# 的 aysnc/await 使用习惯。</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright></Copyright>
+    <Authors>GF-Huang</Authors>
+    <Company>GF-Huang</Company>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="FutuQuoteClient.cs~RF285270bd.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="futu-api" Version="5.8.2012" />
+    <!--<PackageReference Include="System.ValueTuple" Version="4.5.0" Condition="'$(TargetFramework)' == 'net45'" />-->
+  </ItemGroup>
+
+</Project>
