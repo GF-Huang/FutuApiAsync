@@ -8,15 +8,25 @@
     <Copyright></Copyright>
     <Authors>GF-Huang</Authors>
     <Company>GF-Huang</Company>
+    <PackageProjectUrl>https://github.com/GF-Huang/FutuApiAsync</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/GF-Huang/FutuApiAsync</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Futu Quant OpenD</PackageTags>
+    
+    <!-- Optional: Publish the repository URL in the built .nupkg (in the NuSpec <Repository> element) -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <!-- Optional: Embed source files that are not tracked by the source control manager in the PDB -->
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <!-- Optional: Build symbol package (.snupkg) to distribute the PDB containing Source Link -->
+    <IncludeSymbols>true</IncludeSymbols>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="FutuQuoteClient.cs~RF285270bd.TMP" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="futu-api" Version="5.8.2012" />
-    <!--<PackageReference Include="System.ValueTuple" Version="4.5.0" Condition="'$(TargetFramework)' == 'net45'" />-->
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>
