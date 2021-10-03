@@ -111,14 +111,14 @@ namespace FutuApiAsync {
 
         #region FTSPI_Conn
 
-        public void OnInitConnect(FTAPI_Conn client, long errCode, string desc) {
+        void FTSPI_Conn.OnInitConnect(FTAPI_Conn client, long errCode, string desc) {
             if (errCode == 0)
                 _connectTcs.SetResult(true);
             else
                 _connectTcs.SetException(new FutuClientConnectException(errCode, desc));
         }
 
-        public void OnDisconnect(FTAPI_Conn client, long errCode) {
+        void FTSPI_Conn.OnDisconnect(FTAPI_Conn client, long errCode) {
             Disconnected?.Invoke(this, errCode);
         }
 
