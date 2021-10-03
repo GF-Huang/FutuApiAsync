@@ -7,6 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FutuApiAsync {
+    /// <summary>
+    /// 交易连接类，提供了交易接口。
+    /// </summary>
     public class FutuTradeClient : FutuClientBase, FTSPI_Trd {
         private static readonly string NoTradeHeaderMessage = $"trdHeader 为空，同时也未设置 {nameof(DefaultTradeHeader)}。";
 

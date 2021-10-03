@@ -1,10 +1,19 @@
 ﻿using System;
 
 namespace FutuApiAsync {
+    /// <summary>
+    /// 表示调用 <see cref="FutuQuoteClient"/> 或 <see cref="FutuTradeClient"/> 接口时产生的异常。
+    /// </summary>
     [Serializable]
     public class FutuClientException : Exception {
+        /// <summary>
+        /// 返回结果。
+        /// </summary>
         public RetType RetType { get; }
 
+        /// <summary>
+        /// 错误代码。
+        /// </summary>
         public int ErrorCode { get; }
 
         public FutuClientException(RetType type, int errorCode, string message) : base(message) {

@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FutuApiAsync {
+    /// <summary>
+    /// 表示 <see cref="FutuQuoteClient"/> 或 <see cref="FutuTradeClient"/> 连接到网关时产生的异常。
+    /// </summary>
     [Serializable]
     public class FutuClientConnectException : Exception {
         public long ErrorCode { get; }

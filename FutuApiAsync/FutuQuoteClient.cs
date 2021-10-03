@@ -7,6 +7,9 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace FutuApiAsync {
+    /// <summary>
+    /// 行情连接类，提供了行情接口。
+    /// </summary>
     public class FutuQuoteClient : FutuClientBase, FTSPI_Qot {
         /// <summary>
         /// 获取底层 <see cref="FTAPI_Qot"/> 对象。
@@ -31,6 +34,9 @@ namespace FutuApiAsync {
         /// <param name="securities">股票集合。</param>
         /// <param name="subTypes">订阅类型集合。</param>
         /// <param name="isSubOrUnSub">true 表示订阅，false 表示反订阅。</param>
+        /// <param name="isRegOrUnRegPush">是否注册或反注册该连接上面行情的推送，该参数不指定不做注册反注册操作。</param>
+        /// <param name="rehabTypes">复权类型，注册推送并且是 K 线类型才生效，其他订阅类型忽略该参数，注册 K 线推送时该参数不指定默认前复权。</param>
+        /// <param name="isFirstPush">注册后如果本地已有数据是否首推一次已存在数据，该参数不指定则默认 true。</param>
         /// <param name="isSubOrderBookDetail">是否订阅摆盘明细。</param>
         /// <param name="extendedTime">是否允许美股盘前盘后数据。</param>
         public Task Sub(IEnumerable<QotCommon.Security> securities, IEnumerable<QotCommon.SubType> subTypes, bool isSubOrUnSub = true,

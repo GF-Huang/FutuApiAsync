@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>net45;netcoreapp2.1</TargetFrameworks>
-    <Version>0.1.0</Version>
+    <Version>0.1.2</Version>
     <Description>在富途官方 API 的基础上进行异步包装，使接口更符合现代 C# 的 aysnc/await 使用习惯。</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Copyright></Copyright>
@@ -12,6 +12,7 @@
     <RepositoryUrl>https://github.com/GF-Huang/FutuApiAsync</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Futu Quant OpenD</PackageTags>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     
     <!-- Optional: Publish the repository URL in the built .nupkg (in the NuSpec <Repository> element) -->
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -19,6 +20,16 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <!-- Optional: Build symbol package (.snupkg) to distribute the PDB containing Source Link -->
     <IncludeSymbols>true</IncludeSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFrameworks)|$(Platform)'=='Debug|net45;netcoreapp2.1|AnyCPU'">
+    <WarningsAsErrors>;NU1605</WarningsAsErrors>
+    <NoWarn>1701;1702;CS1591</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFrameworks)|$(Platform)'=='Release|net45;netcoreapp2.1|AnyCPU'">
+    <WarningsAsErrors>;NU1605</WarningsAsErrors>
+    <NoWarn>1701;1702;CS1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
