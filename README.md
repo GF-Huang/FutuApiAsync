@@ -1,5 +1,7 @@
 # FutuApiAsync 
-在富途官方 API 的基础上进行异步包装，使接口更符合现代 C# 的 aysnc/await 使用习惯。
+Asynchronous wrapper based on Futu broker official API, so that the interface is more in line with the async/await usage habits of modern C#.
+
+在富途官方 API 的基础上进行异步包装，使接口更符合现代 C# 的 async/await 使用习惯。
 
 由于许多接口需要付费开通相关权限，大部分接口未经测试，欢迎贡献单元测试。
 
