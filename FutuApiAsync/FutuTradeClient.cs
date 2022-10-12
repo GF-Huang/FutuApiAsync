@@ -22,7 +22,7 @@ namespace FutuApiAsync {
         /// 默认的交易公共参数头。
         /// 设置后可以避免在每个需要 <see cref="TrdCommon.TrdHeader"/> 的方法都传入交易公共参数头而带来的不便。 
         /// </summary>
-        public TrdCommon.TrdHeader DefaultTradeHeader { get; set; }
+        public TrdCommon.TrdHeader? DefaultTradeHeader { get; set; }
 
         public FutuTradeClient() : this(string.Empty) { }
 
@@ -89,7 +89,7 @@ namespace FutuApiAsync {
         /// </para>
         /// </param>
         /// <returns></returns>
-        public Task<TrdCommon.Funds> GetFunds(bool? refreshCache, TrdCommon.Currency? currency, TrdCommon.TrdHeader trdHeader = null) {
+        public Task<TrdCommon.Funds> GetFunds(bool? refreshCache, TrdCommon.Currency? currency, TrdCommon.TrdHeader? trdHeader = null) {
             var builder = TrdGetFunds.C2S.CreateBuilder().SetHeader(trdHeader ?? DefaultTradeHeader ??
                                                                     throw new InvalidOperationException(NoTradeHeaderMessage));
             if (refreshCache.HasValue)
@@ -126,7 +126,7 @@ namespace FutuApiAsync {
         /// <returns></returns>
         public Task<TrdCommon.MaxTrdQtys> GetMaxTrdQtys(TrdCommon.OrderType orderType, string code, double price,
                                                         ulong? orderID, bool? adjustPrice, double? adjustSideAndLimit,
-                                                        TrdCommon.TrdSecMarket? secMarket, TrdCommon.TrdHeader trdHeader = null) {
+                                                        TrdCommon.TrdSecMarket? secMarket, TrdCommon.TrdHeader? trdHeader = null) {
             var builder = TrdGetMaxTrdQtys.C2S.CreateBuilder()
                                               .SetOrderType((int)orderType)
                                               .SetCode(code)
@@ -168,9 +168,9 @@ namespace FutuApiAsync {
         /// </para>
         /// </param>
         /// <returns></returns>
-        public Task<IList<TrdCommon.Position>> GetPositionList(TrdCommon.TrdFilterConditions filterConditions = null,
+        public Task<IList<TrdCommon.Position>> GetPositionList(TrdCommon.TrdFilterConditions? filterConditions = null,
                                                                double? filterPLRatioMin = null, double? filterPLRatioMax = null,
-                                                               bool? refreshCache = null, TrdCommon.TrdHeader trdHeader = null) {
+                                                               bool? refreshCache = null, TrdCommon.TrdHeader? trdHeader = null) {
             var builder = TrdGetPositionList.C2S.CreateBuilder()
                                                 .SetHeader(trdHeader ?? DefaultTradeHeader ??
                                                            throw new InvalidOperationException(NoTradeHeaderMessage));
@@ -201,7 +201,7 @@ namespace FutuApiAsync {
         /// </param>
         /// <returns></returns>
         public Task<IList<TrdGetMarginRatio.MarginRatioInfo>> GetMarginRatio(IEnumerable<QotCommon.Security> securities,
-                                                                             TrdCommon.TrdHeader trdHeader = null) {
+                                                                             TrdCommon.TrdHeader? trdHeader = null) {
             var builder = TrdGetMarginRatio.C2S.CreateBuilder()
                                                .AddRangeSecurityList(securities)
                                                .SetHeader(trdHeader ?? DefaultTradeHeader ??
@@ -246,9 +246,9 @@ namespace FutuApiAsync {
         /// <returns></returns>
         public Task<ulong> PlaceOrder(TrdCommon.TrdSide trdSide, TrdCommon.OrderType orderType, string code, double qty, double price,
                                       bool? adjustPrice = null, double? adjustSideAndLimit = null, TrdCommon.TrdSecMarket? secMarket = null,
-                                      string remark = null, TrdCommon.TimeInForce? timeInForce = null, bool? fillOutsideRTH = null,
+                                      string? remark = null, TrdCommon.TimeInForce? timeInForce = null, bool? fillOutsideRTH = null,
                                       double? auxPrice = null, TrdCommon.TrailType? trailType = null, double? trailValue = null,
-                                      double? trailSpread = null, TrdCommon.TrdHeader trdHeader = null) {
+                                      double? trailSpread = null, TrdCommon.TrdHeader? trdHeader = null) {
             var builder = TrdPlaceOrder.C2S.CreateBuilder()
                                            .SetPacketID(Trade.NextPacketID())
                                            .SetTrdSide((int)trdSide)
@@ -312,7 +312,7 @@ namespace FutuApiAsync {
                                        bool? forAll = null, double? qty = null, double? price = null,
                                        bool? adjustPrice = null, double? adjustSideAndLimit = null,
                                        double? auxPrice = null, TrdCommon.TrailType? trailType = null, double? trailValue = null,
-                                       double? trailSpread = null, TrdCommon.TrdHeader trdHeader = null) {
+                                       double? trailSpread = null, TrdCommon.TrdHeader? trdHeader = null) {
             var builder = TrdModifyOrder.C2S.CreateBuilder()
                                             .SetPacketID(Trade.NextPacketID())
                                             .SetOrderID(orderID)
@@ -362,9 +362,9 @@ namespace FutuApiAsync {
         /// </para>
         /// </param>
         /// <returns></returns>
-        public Task<IList<TrdCommon.Order>> GetOrderList(TrdCommon.TrdFilterConditions filterConditions = null,
-                                                         IEnumerable<TrdCommon.OrderStatus> filterStatuses = null,
-                                                         bool? refreshCache = null, TrdCommon.TrdHeader trdHeader = null) {
+        public Task<IList<TrdCommon.Order>> GetOrderList(TrdCommon.TrdFilterConditions? filterConditions = null,
+                                                         IEnumerable<TrdCommon.OrderStatus>? filterStatuses = null,
+                                                         bool? refreshCache = null, TrdCommon.TrdHeader? trdHeader = null) {
             var builder = TrdGetOrderList.C2S.CreateBuilder()
                                              .SetHeader(trdHeader ?? DefaultTradeHeader ??
                                                         throw new InvalidOperationException(NoTradeHeaderMessage));
@@ -394,8 +394,8 @@ namespace FutuApiAsync {
         /// </param>
         /// <returns></returns>
         public Task<IList<TrdCommon.Order>> GetHistoryOrderList(TrdCommon.TrdFilterConditions filterConditions,
-                                                                IEnumerable<TrdCommon.OrderStatus> filterStatuses = null,
-                                                                TrdCommon.TrdHeader trdHeader = null) {
+                                                                IEnumerable<TrdCommon.OrderStatus>? filterStatuses = null,
+                                                                TrdCommon.TrdHeader? trdHeader = null) {
             var builder = TrdGetHistoryOrderList.C2S.CreateBuilder()
                                                     .SetFilterConditions(filterConditions)
                                                     .SetHeader(trdHeader ?? DefaultTradeHeader ??
@@ -424,7 +424,7 @@ namespace FutuApiAsync {
         /// <summary>
         /// 订单推送事件，异步处理 FutuOpenD 推送过来的订单状态信息。
         /// </summary>
-        public event EventHandler<TrdCommon.Order> UpdateOrder;
+        public event EventHandler<TrdCommon.Order>? UpdateOrder;
 
         #endregion // 订单
 
@@ -448,9 +448,9 @@ namespace FutuApiAsync {
         /// </para>
         /// </param>
         /// <returns></returns>
-        public Task<IList<TrdCommon.OrderFill>> GetOrderFillList(TrdCommon.TrdFilterConditions filterConditions = null,
+        public Task<IList<TrdCommon.OrderFill>> GetOrderFillList(TrdCommon.TrdFilterConditions? filterConditions = null,
                                                                  bool? refreshCache = null,
-                                                                 TrdCommon.TrdHeader trdHeader = null) {
+                                                                 TrdCommon.TrdHeader? trdHeader = null) {
             var builder = TrdGetOrderFillList.C2S.CreateBuilder().SetHeader(trdHeader ?? DefaultTradeHeader ?? 
                                                                             throw new InvalidOperationException(NoTradeHeaderMessage));
             if (filterConditions != null)
@@ -476,7 +476,7 @@ namespace FutuApiAsync {
         /// </param>
         /// <returns></returns>
         public Task<IList<TrdCommon.OrderFill>> GetHistoryOrderFillList(TrdCommon.TrdFilterConditions filterConditions,
-                                                                        TrdCommon.TrdHeader trdHeader = null) {
+                                                                        TrdCommon.TrdHeader? trdHeader = null) {
             var builder = TrdGetHistoryOrderFillList.C2S.CreateBuilder()
                                                         .SetFilterConditions(filterConditions)
                                                         .SetHeader(trdHeader ?? DefaultTradeHeader ?? 
@@ -490,7 +490,7 @@ namespace FutuApiAsync {
         /// <summary>
         /// 成交推送事件，异步处理 FutuOpenD 推送过来的成交状态信息。
         /// </summary>
-        public event EventHandler<TrdCommon.OrderFill> UpdateOrderFill;
+        public event EventHandler<TrdCommon.OrderFill>? UpdateOrderFill;
 
         #endregion // 成交
 

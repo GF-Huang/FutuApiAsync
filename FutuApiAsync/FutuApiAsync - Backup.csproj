@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFrameworks>net462;netcoreapp2.1;netcoreapp2.2;netcoreapp3.0;netcoreapp3.1;net5.0;net6.0</TargetFrameworks>
-    <Version>0.3.0</Version>
-    <Description>在富途官方 API 的基础上进行异步包装，使接口更符合现代 C# 的 async/await 使用习惯。</Description>
+    <Version>0.3.0-beta1</Version>
+    <Description>在富途官方 API 的基础上进行异步包装，使接口更符合现代 C# 的 aysnc/await 使用习惯。</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Copyright></Copyright>
     <Authors>GF-Huang</Authors>
@@ -22,12 +22,10 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <!-- Optional: Build symbol package (.snupkg) to distribute the PDB containing Source Link -->
     <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <PropertyGroup>
     <NoWarn>1701;1702;CS1591</NoWarn>
-    <PackageReleaseNotes>支持 Nullable。</PackageReleaseNotes>
   </PropertyGroup>
 
   <!--<Target Name="PrintLangVersion" BeforeTargets="Build">

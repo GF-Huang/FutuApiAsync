@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace FutuApiAsync {
     public abstract class FutuClientBase : IDisposable, FTSPI_Conn {
-        public event DisconnectedEventHandler Disconnected;
+        public event DisconnectedEventHandler? Disconnected;
 
         protected readonly FTAPI_Conn _connectionObject;
         // 这里的 Task 返回值用 bool 类型无实际意义，因为 .NET 5 开始才有非泛型版本的 TaskCompletionSource。
@@ -45,10 +45,10 @@ namespace FutuApiAsync {
             return (T)await tsc.Task.ConfigureAwait(false);
         }
 
-        protected void HandleReply(uint serialNo, int retType, int errorCode, string retMsg, object responseObject) {
+        protected void HandleReply(uint serialNo, int retType, int errorCode, string retMsg, object? responseObject) {
             if (_requestTaskCompletionSources.TryRemove(serialNo, out var tcs)) {
                 if (retType == ((int)RetType.Succeed))
-                    tcs.SetResult(responseObject);
+                    tcs.SetResult(responseObject!);
                 else
                     tcs.SetException(new FutuClientException((RetType)retType, errorCode, retMsg));
             }

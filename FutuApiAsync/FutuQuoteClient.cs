@@ -40,7 +40,7 @@ namespace FutuApiAsync {
         /// <param name="isSubOrderBookDetail">是否订阅摆盘明细。</param>
         /// <param name="extendedTime">是否允许美股盘前盘后数据。</param>
         public Task Sub(IEnumerable<QotCommon.Security> securities, IEnumerable<QotCommon.SubType> subTypes, bool isSubOrUnSub = true,
-                        bool? isRegOrUnRegPush = null, IEnumerable<QotCommon.RehabType> rehabTypes = null, bool? isFirstPush = null,
+                        bool? isRegOrUnRegPush = null, IEnumerable<QotCommon.RehabType>? rehabTypes = null, bool? isFirstPush = null,
                         bool? isSubOrderBookDetail = null, bool? extendedTime = null) {
             var builder = QotSub.C2S.CreateBuilder().AddRangeSecurityList(securities)
                                                     .AddRangeSubTypeList(subTypes.Cast<int>())
@@ -189,32 +189,32 @@ namespace FutuApiAsync {
         /// <summary>
         /// 实时报价事件，异步处理已订阅股票的实时报价推送。
         /// </summary>
-        public event EventHandler<IList<QotCommon.BasicQot>> UpdateBasicQot;
+        public event EventHandler<IList<QotCommon.BasicQot>>? UpdateBasicQot;
 
         /// <summary>
         /// 实时摆盘事件，异步处理已订阅股票的实时摆盘推送。
         /// </summary>
-        public event EventHandler<QotUpdateOrderBook.S2C> UpdateOrderBook;
+        public event EventHandler<QotUpdateOrderBook.S2C>? UpdateOrderBook;
 
         /// <summary>
         /// 实时 K 线事件，异步处理已订阅股票的实时 K 线推送。
         /// </summary>
-        public event EventHandler<QotUpdateKL.S2C> UpdateKL;
+        public event EventHandler<QotUpdateKL.S2C>? UpdateKL;
 
         /// <summary>
         /// 实时逐笔事件，异步处理已订阅股票的实时逐笔推送。
         /// </summary>
-        public event EventHandler<QotUpdateTicker.S2C> UpdateTicker;
+        public event EventHandler<QotUpdateTicker.S2C>? UpdateTicker;
 
         /// <summary>
         /// 实时分时事件，异步处理已订阅股票的实时分时推送。
         /// </summary>
-        public event EventHandler<QotUpdateRT.S2C> UpdateRT;
+        public event EventHandler<QotUpdateRT.S2C>? UpdateRT;
 
         /// <summary>
         /// 实时经纪队列事件，异步处理已订阅股票的实时经纪队列推送。
         /// </summary>
-        public event EventHandler<QotUpdateBroker.S2C> UpdateBroker;
+        public event EventHandler<QotUpdateBroker.S2C>? UpdateBroker;
 
         #endregion // 实时行情
 
@@ -311,7 +311,7 @@ namespace FutuApiAsync {
         public Task<QotRequestHistoryKL.S2C> RequestHistoryKL(QotCommon.RehabType rehabType, QotCommon.KLType klType,
                                                               QotCommon.Security security, DateTime beginDate, DateTime endDate,
                                                               int? maxAckKLNum = null, QotCommon.KLFields? needKLFieldsFlag = null,
-                                                              ByteString nextReqKey = null, bool? extendedTime = null) {
+                                                              ByteString? nextReqKey = null, bool? extendedTime = null) {
             var builder = QotRequestHistoryKL.C2S.CreateBuilder()
                                                  .SetRehabType((int)rehabType)
                                                  .SetKlType((int)klType)
@@ -380,7 +380,7 @@ namespace FutuApiAsync {
         public Task<IList<QotGetOptionChain.OptionChain>> GetOptionChain(
             QotCommon.Security owner, DateTime beginDate, DateTime endDate,
             QotCommon.IndexOptionType? indexOptionType = null, QotCommon.OptionType? optionType = null,
-            QotGetOptionChain.OptionCondType? optionCondType = null, QotGetOptionChain.DataFilter dataFilter = null) {
+            QotGetOptionChain.OptionCondType? optionCondType = null, QotGetOptionChain.DataFilter? dataFilter = null) {
             var builder = QotGetOptionChain.C2S.CreateBuilder()
                                                .SetOwner(owner)
                                                .SetBeginTime(beginDate.ToString("yyyy-MM-dd"))
@@ -457,12 +457,12 @@ namespace FutuApiAsync {
         /// <param name="customIndicatorFilters">自定义技术指标过滤器。</param>
         /// <returns></returns>
         public Task<QotStockFilter.S2C> StockFilter(int begin, int num, QotCommon.QotMarket market,
-                                                    QotCommon.Security plate = null,
-                                                    IEnumerable<QotStockFilter.BaseFilter> baseFilters = null,
-                                                    IEnumerable<QotStockFilter.AccumulateFilter> accumulateFilters = null,
-                                                    IEnumerable<QotStockFilter.FinancialFilter> financialFilters = null,
-                                                    IEnumerable<QotStockFilter.PatternFilter> patternFilters = null,
-                                                    IEnumerable<QotStockFilter.CustomIndicatorFilter> customIndicatorFilters = null) {
+                                                    QotCommon.Security? plate = null,
+                                                    IEnumerable<QotStockFilter.BaseFilter>? baseFilters = null,
+                                                    IEnumerable<QotStockFilter.AccumulateFilter>? accumulateFilters = null,
+                                                    IEnumerable<QotStockFilter.FinancialFilter>? financialFilters = null,
+                                                    IEnumerable<QotStockFilter.PatternFilter>? patternFilters = null,
+                                                    IEnumerable<QotStockFilter.CustomIndicatorFilter>? customIndicatorFilters = null) {
             var builder = QotStockFilter.C2S.CreateBuilder().SetBegin(begin).SetNum(num).SetMarket((int)market);
             if (plate != null)
                 builder.SetPlate(plate);
@@ -528,7 +528,7 @@ namespace FutuApiAsync {
         /// <returns></returns>
         public Task<IList<QotCommon.SecurityStaticInfo>> GetStaticInfo(QotCommon.QotMarket? market = null, 
                                                                        QotCommon.SecurityType? securityType = null,
-                                                                       IEnumerable<QotCommon.Security> securities = null) {
+                                                                       IEnumerable<QotCommon.Security>? securities = null) {
             var builder = QotGetStaticInfo.C2S.CreateBuilder();
             if (market.HasValue)
                 builder.SetMarket((int)market);
@@ -576,7 +576,7 @@ namespace FutuApiAsync {
         /// <param name="security">指定标的。</param>
         /// <returns></returns>
         public Task<IList<QotRequestTradeDate.TradeDate>> RequestTradeDate(QotCommon.QotMarket market, DateTime beginDate, DateTime endDate,
-                                                                           QotCommon.Security security = null) {
+                                                                           QotCommon.Security? security = null) {
             var builder = QotRequestTradeDate.C2S.CreateBuilder()
                                                  .SetMarket((int)market)
                                                  .SetBeginTime(beginDate.ToString("yyyy-MM-dd"))
@@ -622,7 +622,7 @@ namespace FutuApiAsync {
         public Task<long> SetPriceReminder(QotCommon.Security security, QotSetPriceReminder.SetPriceReminderOp op,
                                            long? key = null, QotCommon.PriceReminderType? priceReminderType = null,
                                            QotCommon.PriceReminderFreq? priceReminderFreq = null, double? value = null,
-                                           string note = null) {
+                                           string? note = null) {
             var builder = QotSetPriceReminder.C2S.CreateBuilder()
                                                  .SetSecurity(security)
                                                  .SetOp((int)op);
@@ -649,7 +649,7 @@ namespace FutuApiAsync {
         /// <param name="security"></param>
         /// <param name="market"></param>
         /// <returns></returns>
-        public Task<IList<QotGetPriceReminder.PriceReminder>> GetPriceReminder(QotCommon.Security security = null,
+        public Task<IList<QotGetPriceReminder.PriceReminder>> GetPriceReminder(QotCommon.Security? security = null,
                                                                                QotCommon.QotMarket? market = null) {
             var builder = QotGetPriceReminder.C2S.CreateBuilder();
             if (security != null)
@@ -709,7 +709,7 @@ namespace FutuApiAsync {
         /// <summary>
         /// 到价提醒通知事件，异步处理已设置到价提醒的通知推送。
         /// </summary>
-        public event EventHandler<QotUpdatePriceReminder.S2C> UpdatePriceReminder;
+        public event EventHandler<QotUpdatePriceReminder.S2C>? UpdatePriceReminder;
 
         #endregion // 个性化
 
@@ -718,7 +718,7 @@ namespace FutuApiAsync {
         /// <summary>
         /// 通知 FutuOpenD 一些重要消息，类似连接断开等。
         /// </summary>
-        public event EventHandler<Notify.S2C> Notify;
+        public event EventHandler<Notify.S2C>? Notify;
 
         #endregion // 基础功能
 
